@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 interface PreviewFrameProps {
   files: any[];
-  webContainer: WebContainer;
+  webContainer:  WebContainer;
 }
 
 export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
@@ -11,6 +11,7 @@ export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
   const [url, setUrl] = useState("");
 
   async function main() {
+    
     const installProcess = await webContainer.spawn('npm', ['install']);
 
     installProcess.output.pipeTo(new WritableStream({
@@ -24,8 +25,8 @@ export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
     // Wait for `server-ready` event
     webContainer.on('server-ready', (port, url) => {
       // ...
-      console.log(url)
-      console.log(port)
+      console.log("url",url)
+      console.log("port",port)
       setUrl(url);
     });
   }
